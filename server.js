@@ -184,6 +184,15 @@ app.use('/api/students', studentRoutes);
 app.get('/', (req, res) => {
   res.send('Bitbucket Dashboard Backend is running.');
 });
+app.get('/', (req, res) => {
+  // Check if mongoose is connected to MongoDB
+  if (mongoose.connection.readyState === 1) { // 1 means connected
+    res.send('MongoDB connected successfully!');
+  } else {
+    res.send('MongoDB connection failed. Please try again.');
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
