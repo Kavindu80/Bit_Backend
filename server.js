@@ -14,7 +14,9 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 const BITBUCKET_API_URL = 'https://api.bitbucket.org/2.0';
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://frontend-bdashboard-gyg3fpe0haehdqf9.eastasia-01.azurewebsites.net',  // Replace with your frontend URL
+}));
 
 app.use(express.json());
 app.use(morgan('dev'));
