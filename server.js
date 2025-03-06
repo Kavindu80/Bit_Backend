@@ -15,9 +15,9 @@ const PORT = process.env.PORT || 4000;
 const BITBUCKET_API_URL = 'https://api.bitbucket.org/2.0';
 
 app.use(cors({
-    origin: "https://bitbucket-dashboard-d0dvbdfpf9cwe0cs.eastasia-01.azurewebsites.net", // Allow frontend domain
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-    credentials: true // Allow cookies if needed
+  origin: "*", // Allow all origins (for development only)
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 
 app.use(express.json());
