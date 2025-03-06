@@ -19,6 +19,9 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+
 class AppError extends Error {
   constructor(message, statusCode) {
     super(message);
@@ -105,6 +108,10 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     error: err.message || 'Something went wrong!',
   });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.get(
