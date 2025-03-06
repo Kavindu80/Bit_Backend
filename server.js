@@ -165,17 +165,14 @@ app.get(
       res.json({ success: true, commits });
     } catch (error) {
       next(new AppError('Failed to fetch commits. Check your workspace, repoSlug, or token.', 500));
-    }
+    }a
   })
 );
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  retryWrites: false,
-  tls: true, 
-  authMechanism: "SCRAM-SHA-256" // Ensure authentication is correct
-})
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
   
 const adminRoutes = require('./routes/Admins');
 app.use('/api/admin', adminRoutes);
