@@ -165,10 +165,6 @@ app.get(
   })
 );
 
-// Connect to MongoDB
-//mongodb+srv://user1:user1@cluster0.29tg0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-//mongodb://localhost:27017/bitbucket_dashboard
-//'mongodb+srv://kavindu:xppFRIgfwykHia2E@cluster0.iofqwq5.mongodb.net/bitbucket_admin?retryWrites=true&w=majority&appName=Cluster0'
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
@@ -184,14 +180,6 @@ app.use('/api/students', studentRoutes);
 
 app.get('/', (req, res) => {
   res.send('Bitbucket Dashboard Backend is running.');
-});
-app.get('/', (req, res) => {
-  // Check if mongoose is connected to MongoDB
-  if (mongoose.connection.readyState === 1) { // 1 means connected
-    res.send('MongoDB connected successfully!');
-  } else {
-    res.send('MongoDB connection failed. Please try again.');
-  }
 });
 
 
