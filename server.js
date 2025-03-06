@@ -169,10 +169,13 @@ app.get(
   })
 );
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected successfully'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  retryWrites: false,
+  tls: true, 
+  authMechanism: "SCRAM-SHA-256" // Ensure authentication is correct
+})
   
 const adminRoutes = require('./routes/Admins');
 app.use('/api/admin', adminRoutes);
