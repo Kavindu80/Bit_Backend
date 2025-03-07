@@ -169,10 +169,17 @@ app.get(
   })
 );
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected successfully'))
+// mongoose.connect(process.env.MONGO_URI)
+//   .then(() => console.log('MongoDB connected successfully'))
+//   .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tls: true, // Ensures a secure connection
+  authMechanism: "SCRAM-SHA-256",
+})
+  .then(() => console.log('Connected to Azure Cosmos DB successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
-
   
 const adminRoutes = require('./routes/Admins');
 app.use('/api/admin', adminRoutes);
